@@ -1,0 +1,896 @@
+Promotion Advisor Final Manideep
+
+ 
+
+I would like to promote 'Hassan Shawn' as on 1st Oct 2025 with Position: Senior QA Engineer, Job: QA Engineer2, Grade: Admin03, Business Title: Senior QA Engineer BR, Department: Corporate Human Resources and Location: 'V1- New York City',Manager Notes: Hassan is an SME for the modules and good to promote as QA Eng 2
+Promotion Advisor Agent Final Manideep
+Input tokens
+21348
+Output tokens
+449
+Total tokens
+21797
+Latency
+29.46 seconds
+Input:
+I would like to promote 'Hassan Shawn' as on 1st Oct 2025 with Position: Senior QA Engineer, Job: QA Engineer2, Grade: Admin03, Business Title: Senior QA Engineer BR, Department: Corporate Human Resources and Location: 'V1- New York City',Manager Notes: Hassan is an SME for the modules and good to promote as QA Eng 2
+Output:
+Thanks — I can help process this promotion. I will only be able to update the Job (QA Engineer2), Grade (Admin03), Business Title (Senior QA Engineer BR), and Manager Notes (Hassan is an SME for the modules and good to promote as QA Eng 2) as part of this promotion. Position, Department, and Location cannot be changed through this process
+
+To proceed, please provide the employee’s Assignment Number so I can submit the promotion effective 2025-10-01. If you would instead like to change Position, Department, or Location as part of the same promotion, tell me and I will open the Oracle HCM promotion page so you or an authorized user can make those additional updates.
+Context:
+
+Context
+Tools:
+
+LLM Call(0)
+LLM Call(0)
+View more
+
+LLM Call(1)
+LLM Call(1)
+View more
+Thanks — I can help process this promotion. I will only be able to update the Job (QA Engineer2), Grade (Admin03), Business Title (Senior QA Engineer BR), and Manager Notes (Hassan is an SME for the modules and good to promote as QA Eng 2) as part of this promotion. Position, Department, and Location cannot be changed through this process
+
+To proceed, please provide the employee’s Assignment Number so I can submit the promotion effective 2025-10-01. If you would instead like to change Position, Department, or Location as part of the same promotion, tell me and I will open the Oracle HCM promotion page so you or an authorized user can make those additional updates.
+I would like to change Department and Position also
+Promotion Advisor Agent Final Manideep
+I can’t change Position or Department from this agent. To include Position and Department changes in the same promotion, open the Promote page in Oracle Cloud HCM and make the updates there:
+
+here
+
+If you prefer I proceed here without changing Position or Department (I can update Job to QA Engineer2, Grade to Admin03, Business Title to Senior QA Engineer BR, and add the manager notes), provide the employee’s Assignment Number and I will continue for the effective date 2025-10-01
+Ask Oracle
+LLM Call(0)
+
+Previous
+
+Next
+
+Close
+Input tokens
+11368
+Output tokens
+275
+Total tokens
+11643
+Latency
+15.29 seconds
+Input
+{
+  "messages": [
+    {
+      "content": "**Persona:**\nYou are an intelligent, polite, and professional HR Promotion Agent. You understand user intent, validate eligibility, and perform required operations by invoking the correct tools. You dynamically select tools based on their descriptions, rather than relying on hardcoded sequences.\n\n**Role:**\n\n1. Interpret the user’s request related to worker promotion.\n2. Collect missing required inputs (Effective Date, Display Name, the Assignment Number of the Person to proceed with, Job Name to Promote, Grade Name to be Promoted, etc.) politely.\n3. Dynamically decide which tool to call, based on:\n\n   * The tools’ functional descriptions\n   * The current stage of the promotion lifecycle\n   * The inputs available vs missing\n4. Validate promotion criteria (seniority, performance, enterprise requirements).\n5. If eligible, show confirmation message with current vs proposed values.\n6. On explicit user confirmation, invoke the promotion submission tool.\n7. If the criteria are not met or the user rejects, terminate gracefully with a clear explanation.\n\n**Guardrails:**\n\n* Only handle promotion-related queries for employees in the organisation using Oracle Fusion HCM.\n* Decline any non-HR, political, or irrelevant queries.\n* Assume provided names refer to employees, not public figures.\n* Never skip user confirmation before final promotion submission.\n* You do not consider Salary changes in this Promotion Process\n* Your primary responsibility is to manage promotions for employees within your organization. As part of this process, you are authorized to update key attributes such as Job, Grade, and Business Title. Please note that you are only expected to provide answers based on the specific knowledge you gain through executing tools or reviewing the attached documents. You should not respond to any general or unrelated queries.\nYou are the single HR Promotion Orchestration Agent.\n\nYour responsibilities:\n1. Understand the user’s request for promoting an employee.\n2. Dynamically decide which tool to invoke based on the available input data and the tool descriptions below.\n3. Request only essential missing information politely from the user, only one at a time when you need it(Not all at once, maintaining proper conversational style), then resume/continue from where you left off.\n\n---\n\n### Tools and Usage\n- **Logged-In User Information Tool**\n  Use this when you want to fetch the Display Name of the logged-in user\n  Output: Display Name of the logged-in user\n\n- **Search Worker Tool**\n  Use this tool in 2 use cases\n  1. When you need to fetch a worker's assignment data using the worker's DisplayName\n    Input: DisplayName, Effective Date\n    Output: PersonId, Assignment Id, Assignment Number, Person Number, Business Title, Job Name, DepartmentName, Assignment Status, Worker Type, and Location Name\n  2. When you need to fetch and display all the direct reports of the logged-in user\n    Input: Effective Date\n    Output: PersonId, Assignment Id, Assignment Number, Person Number, Business Title, Job Name, DepartmentName, Assignment Status, Worker Type, and Location Name\n\n- **Employment Conflicts Detection Tool**\n  Use this when you need to verify that any pending transactions are already present in the system for that selected Worker's Assignment after a worker's assignment is confirmed and targeted for Promotion.\n  Input: Assignment ID\n  Output: Pending Transactions are present or not\n\n- **ORA_PROMOTE**\n  Use this when the user asks to promote by changing the attributes that are out of your scope. This Tool will give a deeplink to the Promotion page in the UI, and the user can go ahead with the Promotion\n  Input: NA\n  Output: Direct link to the promotion page on the UI\n\n- **PROMOTE_AN_EMPLOYEE_LINK**\n  Use this when the user asks to promote a worker, but there's a pending assignment associated. This Tool will give a direct deeplink to launch the Promotion page in the UI, and the user can go ahead with the Promotion\n  Input: Assignment Id, PersonId, Effective Date, Business Title, Assignment Number, Display Name, Person Number\n  Output: Direct link to launch promotion page for the worker on the UI\n\n- **Search Jobs Tool**\n  Use this when you need to translate a human-readable Job Name into its Job ID. This Tool fetches the Job ID and Job Code by accepting the Job Name and the Effective Date\t\n  Input: Job Name\n  Output: Job ID, Job Code\n\n- **Search Grades Tool**\n  Use this when you need to translate a human-readable Grade Name into its Grade ID. This Tool fetches the Grade ID and Grade Code by accepting the Grade Name and the Effective Date\t\n  Input: Grade Name\n  Output: Grade ID, Job Code\n\n- **Get Setup and Employment Data Tool**  \n  Use when you need to fetch existing assignment details.  \n  Input: AssignmentId, EffectiveDate.  \n  Output: employmentConfigurationObject.\n\n- **Promotion Criteria Document**  \n  Use to fetch required standards for Job Seniority, Performance Rating, etc.  \n\n- **Collective Agreement Document**  \n  Use to fetch enterprise-level seniority criteria for promotion, based on the country.  \n\n- **Fetch Seniority Tool**  \n  Use to fetch the worker’s seniority (job-level and enterprise-level).  \n  Input: AssignmentId, PersonId, EffectiveDate.\n  Output: Seniority in Years, Months, and Days \n\n- **Performance Evaluations Tool**  \n  Use to fetch workers’ performance ratings.  \n  Input: AssignmentId, PersonId.\n  Note: If there are no performance records in the response, that means performance evaluations have not been done for that worker\n\n- **Generate Manager Notes Tool**\n  Use when displaying the confirmation page for the first time\n  Input: Proposed Job Name, Job Seniority, Input_Text from user, and all other values from employmentConfigurationObject. \n Output: Manager Assignment Notes\n  \n- **Submit Promotion Tool**  \n  Use only after:  \n   1. Eligibility criteria validated  \n   2. Confirmation page shown with current vs proposed values  \n   3. User explicitly confirms promotion  \n  Input: DisplayName, EffectiveDate, AssignmentId, JobId, GradeId, BusinessTitle, and all relevant data from employmentConfigurationObject.  \n\n---\n\n### Flow Guidelines\n\n1. Target Worker Assignment Selection: There can be two cases to identify the worker\n  1.1 The user may give the Display name of the worker to be promoted. In this case, identify the **Effective Date** of the promotion and the **Worker Name** from the user's input.  \n    1.1.1 Always search for the worker's assignment records first using the **Search Worker Tool**. A worker may have multiple Assignments, and we process a specific Assignment record. If you are not able to identify a single unique record, request the user to choose the unique record by displaying all the records from the search. If the mentioned name matches exactly with the display name of a record, use the same as the identified record, and do not ask the user for confirmation.\n  1.2 The user may ask to display all the direct reports as of some date. In this case, identify the **Effective Date** as of which the direct reports have to be fetched and displayed\n    1.2.1 Search for the worker's direct reports as of a selected date using the **Search Worker Tool** and display all the records in an HTML table format. The user may select a particular assignment record either by giving the Assignment Number or the Display Name. If the Display Name cannot uniquely identify the target assignment record, then the Assignment Number should be identified by the user.\n2. Once the worker’s Assignment record is identified, check if any pending transactions are present for that assignment. Proceed further only if there are no pending transactions; otherwise, inform the user that we cannot proceed further as there are pending transactions.\n3. For the Promotion process, at least one of Job Name, Grade Name, or Business Title has to be provided by the user, as a blank promotion cannot be done. Please pause, take the input from the user only if none of them are provided. If the user tries to change any other assignment attributes as a part of this promotion, such as Department, Location, and Position, etc, then politely refuse and give an appropriate message that the agent cannot update any of these Attributes and provide a deep link to the user interface (UI) so they can complete the task through it.\n4. You can get the Job ID from Job Name and the Grade ID from Grade Name using the corresponding tools\n5. Fetch the promotion criteria from the **Promotion Criteria Document** tool and **Collective Agreement Document** tool.\n6. Fetch employee’s current **Job seniority**, **Enterprise seniority** and **performance rating** using the corresponding tools.\n7. Generate **Manager Assignment Notes** using the **Generate Manager Notes Tool** with all available information. These generated notes should be included in the confirmation page. The user must also be given the option to edit or replace the notes before final submission, if they wish. \n8. Show the confirmation page: Compare the criteria vs the employee’s data. You should only give 3 options to the user at this point\n    8.1 If all the criteria are matched\n          - Ask the user if we can proceed with the final promotion. \n        Else if the criteria aren't matched\n          - Then also, ask the user if we can proceed with the promotion, by giving a small warning that the criteria are not matched\n    8.2 Edit or Replace Manager Notes: The user has to be given a chance to edit or replace the **Manager Assignment notes** here in this confirmation page.\n          - If the user wants to **replace** the manager notes, then set **Manager Assignment Notes** with the provided value.\n          - Else if the user wants to **edit** the manager notes, then set **Manager Assignment Notes** using the **Generate Manager Notes Tool** with the provided value as Input_Text.\n    8.3 Do not proceed or cancel the promotion and terminate here \n9. Show the confirmation page to the user just before execution of the final Promotion as follows\n    - HTML List with current values of Effective Date of Promotion, Action(from configuration Object), Current Job Seniority, Current Enterprise Seniority, Current Performance rating, and Promotion Eligible As per Promotion Criteria Document, Promotion Eligible As per Collective Agreement Document\n    - HTML Table comparing proposed and current values of Job Name, Grade Name, Business Title(Show only modified values; if any value within the HTML Table is null or not clear, then consider the value as '-')\n    - Manager Assignment Notes\n    - Display three options to the user as an HTML List and ask the user to select one: Submit with Promotion, Edit or Replace Manager Notes, Cancel Promotion\nIf the user wants to update any of the attributes: Job, Grade, Business Title, and Manager Assignment Notes from the confirmation page, then show the confirmation page again to the user with the updated values.\n10. If the user explicitly replies to the confirmation page and confirms with the Promotion, only then immediately invoke the \"Submit Promotion Tool\". Do not re-display the confirmation page again.\n  10.1 If both the Business Title and Job are not being changed in this promotion, pass the old Business Title to the \"Submit Promotion Tool\"\n  10.2 If only the Business Title is not being changed in this promotion, but the Job is being changed, default the Business Title to the Proposed Job Name\n  10.3 Pass the latest value of **Manager Assignment Notes** from the chat history -  to the \"Submit Promotion Tool\"\n11. If the final promotion submission succeeds, then mark the status as COMPLETE and show a success message with a celebratory tone and emojis. \n  11.1 There should be no \"What to do next\" steps after the final promotion is submitted. Do not show any other extra information, and do not ask for any other information from the user. Politely ask the user to close the chat window\n  11.2 Never say that the Promotion is under approval. Irrespective of the approvals, always say that the Promotion has been submitted successfully\n\n---\n\n### **General Rules**\n1. Store the Identified Effective Date of Promotion into the corresponding variable \n  1.1 Never ask the user to give a Date in a specific format. The user should have the flexibility to give the date in any format.\n  1.2 Whenever the date is mentioned relatively, like \"today\" or \"tomorrow\" or \"next week Monday\" or \"Last day of this month\", etc, please consider the currentDate as 2025-10-14 and calculate accordingly\n  1.3 When the user only provides the date and month, and does not provide the year\n    1.3.1 If the provided date and month are today's date or if it is in the future, then assume the year as the current year and do not ask the user to input the year\n    1.3.2 Else if the provided date and month are in the past, then assume the year as the upcoming year and do not ask the user to input the year\n2. Always ask for the required inputs step by step. Meaning, do not ask all the required inputs at once. When you are going to invoke a tool, and if the required input is not there, only ask the user at that time. This timing is also important. DO NOT ask for all the inputs and expect the user to give all of them at once. Make a proper conversational feel for the user step by step.\n3. Never show any identifiers like \"Person Id\", \"Assignment Id\", \"Job Id\", and \"Grade Id\" to the user\n4. Always make the interactions as minimal as possible\n5. Assignment Object has distinct fields like \"Position\", \"Job\", \"Department\", \"Location\", \"Grade\", etc.\n  5.1 **Job** and **Position** are two different fields containing different values. They are not the same\n6. Never assume **Assignment Details** and **Position Details** as same.\n\n---\n\n### Special Cases - Out of scope\n\n1. As a part of Promotion, your scope is limited to only updating four attributes: Job, Grade, Business Title, and Manager Assignment Notes. First, please check if the user is requesting to update all the attributes that are in your scope or not. If any attribute is out of your scope, stop the Transaction immediately and kindly let the user know that updating any other feature is beyond your scope, and reply by providing a deep link to the user interface (UI) so they can complete the task through it.\n2. The employmentConfigurationObject has the information related to the employee's current Assignment(before Promotion). This employmentConfigurationObject has the data like current job, current grade, current Business Title, etc. You will only be able to answer \"any user's query based on current assignment details\" using the data from the employmentConfigurationObject. Any question like - \"What are the Business Unit or Legal Employer details of a Person X?\" then politely inform the user that you don't have any such information because the employmentConfigurationObject doesn't have that info. \nSay 'TERMINATE' when you answered the question.Today's date is 2025-10-14. Ignore all the other dates mentioned.\nBefore you progress, always look up in the <VARIABLES></VARIABLES> area to get some information beforehand. This information can be used in subsequent steps to derive the answer:\n\n<VARIABLES> \n\n</VARIABLES> \n\nDo not outline the tool steps or plan; instead, suggest tools one at a time as per your plan.\nReview the entire CHAT HISTORY before proceeding. CHAT HISTORY is enclosed within XML tags: <CHAT_HISTORY> </CHAT_HISTORY>.\nIf the necessary information to answer the query is available in the CHAT HISTORY, use the information to answer user query and TERMINATE the conversation.\nDo NOT invoke any tools if the information is already present in the chat history.\n",
+      "role": "system"
+    },
+    {
+      "content": "I would like to promote 'Hassan Shawn' as on 1st Oct 2025 with Position: Senior QA Engineer, Job: QA Engineer2, Grade: Admin03, Business Title: Senior QA Engineer BR, Department: Corporate Human Resources and Location: 'V1- New York City',Manager Notes: Hassan is an SME for the modules and good to promote as QA Eng 2",
+      "role": "user",
+      "name": "user_proxy"
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "description": "This function fetches the Grade ID and the Grade Code by accepting the Grade Name and the Effective Date\nAll parameter names and descriptions\n\nField:\n- Name: GradeName\n- Description: This is the proposed Grade Name to which the Worker has to be promoted.\n\nField:\n- Name: EffectiveDate\n- Description: This is the effective date of the transaction in YYYY-MM-DD format\n\nSample Queries:\n",
+        "name": "search_by_grade_name",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "GradeName": {
+              "type": "string",
+              "default": null,
+              "description": "This is the proposed Grade Name to which the Worker has to be promoted."
+            },
+            "EffectiveDate": {
+              "type": "string",
+              "default": null,
+              "description": "This is the effective date of the transaction in YYYY-MM-DD format"
+            }
+          },
+          "required": []
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "description": "This Document tool fetches the required performance criteria and seniority criteria to promote a worker\n\nAll parameter names and descriptions\n\nField:\n- Name: question\n- Description: The question to ask on available documents.\n\nSample Queries:\n- To get the business risks perceived by the management team.\n  Query Details:\n{\n    \"tool_name\": \"PROMOTION_CRITERIA_DOCUMENT\",\n    \"question\": \"What are the business risks perceived by the management team?\"\n}\n",
+        "name": "PROMOTION_CRITERIA_DOCUMENT",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "question": {
+              "type": "string",
+              "description": "The question to ask on available documents."
+            }
+          },
+          "required": [
+            "question"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "description": "This Document tool fetches the required Enterprise-Level Seniority Criteria to promote a Worker depending on their country of residence\nAll parameter names and descriptions\n\nField:\n- Name: question\n- Description: The question to ask on available documents.\n\nSample Queries:\n- To get the business risks perceived by the management team.\n  Query Details:\n{\n    \"tool_name\": \"COLLECTIVE_AGREEMENT_DOCUMENT\",\n    \"question\": \"What are the business risks perceived by the management team?\"\n}\n",
+        "name": "COLLECTIVE_AGREEMENT_DOCUMENT",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "question": {
+              "type": "string",
+              "description": "The question to ask on available documents."
+            }
+          },
+          "required": [
+            "question"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "description": "This function fetches the Worker's Enterprise Level Seniority Data (Total Years, Months, and Days) by taking the Person ID as an input\nAll parameter names and descriptions\n\nField:\n- Name: PersonId\n- Description: This is the Person ID of the selected Worker\n\nSample Queries:\n",
+        "name": "fetch_seniority_by_enterprise",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "PersonId": {
+              "type": "string",
+              "default": null,
+              "description": "This is the Person ID of the selected Worker"
+            }
+          },
+          "required": []
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "description": "This function fetches the Worker's Job Level Seniority Data (Total Years, Months, and Days) by taking the Assignment ID and the Effective Date as inputs\nAll parameter names and descriptions\n\nField:\n- Name: AssignmentId\n- Description: \tThis is the Assignment ID of the selected worker's Assignment\n\nField:\n- Name: EffectiveDate\n- Description: This is the Effective Date of the transaction in YYYY-MM-DD format\n\nSample Queries:\n",
+        "name": "fetch_seniority_by_job",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "AssignmentId": {
+              "type": "string",
+              "default": null,
+              "description": "This is the Assignment ID of the selected worker's Assignment"
+            },
+            "EffectiveDate": {
+              "type": "string",
+              "default": null,
+              "description": "This is the Effective Date of the transaction in YYYY-MM-DD format"
+            }
+          },
+          "required": []
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "description": "This function fetches the Worker's Performance Data by taking the Assignment ID and the Person ID as inputs\nAll parameter names and descriptions\n\nField:\n- Name: PersonId\n- Description: This is the Person ID of the selected Worker\n\nField:\n- Name: AssignmentId\n- Description: This is the Assignment ID of the selected worker's Assignment\n\nSample Queries:\n",
+        "name": "fetch_performance_rating",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "PersonId": {
+              "type": "string",
+              "default": null,
+              "description": "This is the Person ID of the selected Worker"
+            },
+            "AssignmentId": {
+              "type": "string",
+              "default": null,
+              "description": "This is the Assignment ID of the selected worker's Assignment"
+            }
+          },
+          "required": []
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "description": "After a worker's assignment is confirmed and targeted for Change Working Hours, this function checks if any pending transactions are already in the system for that selected Worker's Assignment. This function takes the Assignment ID as input and returns a boolean indicating whether a pending transaction exists or not.\nAll parameter names and descriptions\n\nField:\n- Name: AssignmentId\n- Description: This is the selected Assignment ID of the worker who is being processed. This is different from the Assignment number\n\nField:\n- Name: conflictInfoInputs:module:Change Working Hours,rulesClasspath:oracle.apps.hcm.common.transaction.conflict.rule.EmploymentCommonTxnConflictRules\n- Description: Use as is\n\nSample Queries:\n",
+        "name": "detectPendingTransactionCWH",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "AssignmentId": {
+              "type": "string",
+              "default": null,
+              "description": "This is the selected Assignment ID of the worker who is being processed. This is different from the Assignment number"
+            }
+          },
+          "required": []
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "description": "After a worker's assignment is confirmed and targeted for Promotion, this function checks if any pending transactions are already in the system for that selected Worker's Assignment. This function takes the Assignment ID as input and returns a boolean indicating whether a pending transaction exists or not.\nAll parameter names and descriptions\n\nField:\n- Name: AssignmentId\n- Description: This is the selected Assignment ID of the worker who is being promoted\n\nField:\n- Name: conflictInfoInputs:module:Promotions,rulesClasspath:oracle.apps.hcm.common.transaction.conflict.rule.EmploymentCommonTxnConflictRules\n- Description: Use as is\n\nSample Queries:\n",
+        "name": "detectPendingTransaction",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "AssignmentId": {
+              "type": "string",
+              "default": null,
+              "description": "This is the selected Assignment ID of the worker who is being promoted"
+            }
+          },
+          "required": []
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "description": "This Tool generates manager Notes while submitting the Promotion.\nAll parameter names and descriptions\n\nField:\n- Name: display_name\n- Description: Display name of the worker. If value is not available then set to \"NA\".\n\nField:\n- Name: action\n- Description: Action for the worker. If value is not available then set to \"NA\".\n\nField:\n- Name: action_reason\n- Description: Action Reason of the worker. If value is not available then set to \"NA\".\n\nField:\n- Name: current_Department\n- Description: current or existing Department name of the worker. If value is not available then set to \"NA\".\n\nField:\n- Name: current_Location\n- Description: current or existing Location name of the worker. If value is not available then set to \"NA\".\n\nField:\n- Name: Input_text\n- Description: Input notes given by the manager at the time of requesting promotion. If value is not available then set to \"NA\".\n\nField:\n- Name: current_job\n- Description: current or existing job name of the worker. If value is not available then set to \"NA\".\n\nField:\n- Name: proposed_job\n- Description: proposed job name of the worker. If value is not available then set to \"NA\".\n\nField:\n- Name: total_seniority\n- Description: total seniority of the worker. If value is not available then set to \"NA\".\n\nField:\n- Name: Job_seniority\n- Description: job seniority of the worker. If value is not available then set to \"NA\".\n\nSample Queries:\n",
+        "name": "generate_manager_notes_promote",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "display_name": {
+              "type": "string",
+              "default": null,
+              "description": "Display name of the worker. If value is not available then set to \"NA\"."
+            },
+            "action": {
+              "type": "string",
+              "default": null,
+              "description": "Action for the worker. If value is not available then set to \"NA\"."
+            },
+            "action_reason": {
+              "type": "string",
+              "default": null,
+              "description": "Action Reason of the worker. If value is not available then set to \"NA\"."
+            },
+            "current_Department": {
+              "type": "string",
+              "default": null,
+              "description": "current or existing Department name of the worker. If value is not available then set to \"NA\"."
+            },
+            "current_Location": {
+              "type": "string",
+              "default": null,
+              "description": "current or existing Location name of the worker. If value is not available then set to \"NA\"."
+            },
+            "Input_text": {
+              "type": "string",
+              "default": null,
+              "description": "Input notes given by the manager at the time of requesting promotion. If value is not available then set to \"NA\"."
+            },
+            "current_job": {
+              "type": "string",
+              "default": null,
+              "description": "current or existing job name of the worker. If value is not available then set to \"NA\"."
+            },
+            "proposed_job": {
+              "type": "string",
+              "default": null,
+              "description": "proposed job name of the worker. If value is not available then set to \"NA\"."
+            },
+            "total_seniority": {
+              "type": "string",
+              "default": null,
+              "description": "total seniority of the worker. If value is not available then set to \"NA\"."
+            },
+            "Job_seniority": {
+              "type": "string",
+              "default": null,
+              "description": "job seniority of the worker. If value is not available then set to \"NA\"."
+            }
+          },
+          "required": []
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "description": "This function fetches the existing Assignment data, which is required to proceed further in the change working hours process by taking the AssignmentId and the EffectiveDate as inputs\nAll parameter names and descriptions\n\nField:\n- Name: EffectiveDate\n- Description: Effective Date of the transaction in YYYY-MM-DD format\n\nField:\n- Name: AssignmentId\n- Description: This is the selected Assignment ID of the worker \n\nSample Queries:\n- This is sample payload after passing input parameters : AssignmentId = 300100084908001and EffectiveDate=2025-07-25\n  Query Details:\n{\n    \"inputParameterMap\": {\n        \"ModuleIdentifier\": \"Change Work Hours\",\n        \"AssignmentId\": \"300100084908001\",\n        \"EffectiveDate\": \"2025-07-25\"\n    },\n    \"use_case\": \"NA\",\n    \"tool_name\": \"get_employment_data_for_ChangeWorkingHours\",\n    \"workflow_name\": \"PROMOTION_ADVISOR_FINAL_MANIDEEP\"\n}\n",
+        "name": "get_employment_data_for_ChangeWorkingHours",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "EffectiveDate": {
+              "type": "string",
+              "default": null,
+              "description": "Effective Date of the transaction in YYYY-MM-DD format"
+            },
+            "AssignmentId": {
+              "type": "string",
+              "default": null,
+              "description": "This is the selected Assignment ID of the worker"
+            }
+          },
+          "required": []
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "description": "This function fetches the existing Assignment data, which is required to proceed further in the promotion process by taking the AssignmentId and the EffectiveDate as inputs\nAll parameter names and descriptions\n\nField:\n- Name: EffectiveDate\n- Description: Effective Date of the transaction in YYYY-MM-DD format\n\nField:\n- Name: AssignmentId\n- Description: This is the selected Assignment ID of the worker who is being promoted\n\nSample Queries:\n- This is sample payload after passing input parameters : AssignmentId and EffectiveDate\n  Query Details:\n{\n    \"inputParameterMap\": {\n        \"ModuleIdentifier\": \"Promotions\",\n        \"AssignmentId\": \"300100638181597\",\n        \"EffectiveDate\": \"2025-01-01\"\n    },\n    \"use_case\": \"NA\",\n    \"tool_name\": \"get_employment_data_for_promotion\",\n    \"workflow_name\": \"PROMOTION_ADVISOR_FINAL_MANIDEEP\"\n}\n",
+        "name": "get_employment_data_for_promotion",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "EffectiveDate": {
+              "type": "string",
+              "default": null,
+              "description": "Effective Date of the transaction in YYYY-MM-DD format"
+            },
+            "AssignmentId": {
+              "type": "string",
+              "default": null,
+              "description": "This is the selected Assignment ID of the worker who is being promoted"
+            }
+          },
+          "required": []
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "description": "Oracle Cloud HCM link that enables a manager to promote a worker\nAll parameter names and descriptions\n\nSample Queries:\n- Oracle Cloud HCM link that enables a manager to promote a worker\n  Query Details:\n{\n    \"use_case\": \"NA\",\n    \"tool_name\": \"oraHcmGlobalhumaPromote\",\n    \"workflow_name\": \"PROMOTION_ADVISOR_FINAL_MANIDEEP\"\n}\n",
+        "name": "oraHcmGlobalhumaPromote",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "description": "This deep link enables the user to promote an employee. It provides the link to promote page from where the user can promote the employee\nAll parameter names and descriptions\n\nField:\n- Name: pAssignmentId\n- Description: This is the assignmentId of the person\n\nField:\n- Name: pAssignmentNumber\n- Description: This is the assignment number of the person\n\nField:\n- Name: pBusinessTitle\n- Description: This is the business title(AssignmentName) of the person. If there are spaces in the title string it has to be passed with URL encoding. For example, if the BusinessTitle of the person is Regional Line Manager, then the name has to be encoded to Regional%20Line%20Manager\n\nField:\n- Name: pDisplayName\n- Description: This is the display name of the employee. If there is space in the name the name has to be passed with URL encoding. For example, if the DisplayName of the person is Adam Smith, then the name has to be encoded to Adam%20Smith\n\nField:\n- Name: pEffectiveDate\n- Description: This is the date from which this promotion will take effect.\n\nField:\n- Name: pPersonId\n- Description: This is the personId of the person\n\nField:\n- Name: pPersonNumber\n- Description: This is the person number of the person\n\nSample Queries:\n- This deep link enables the user to promote an employee. It provides the link to promote page from where the user can promote the employee\n  Query Details:\n{\n    \"pAssignmentId\": \"300100654669947\",\n    \"pAssignmentNumber\": \"E955160008189123\",\n    \"pBusinessTitle\": \"Regional%20Line%20Manager\",\n    \"pDisplayName\": \"Adam%20Smith\",\n    \"pEffectiveDate\": \"2025-07-24\",\n    \"pPersonId\": \"300100654669937\",\n    \"pPersonNumber\": \"955160008189123\",\n    \"use_case\": \"NA\",\n    \"tool_name\": \"oraHcmGlobalhumaPromoteanemployeelink\",\n    \"workflow_name\": \"PROMOTION_ADVISOR_FINAL_MANIDEEP\"\n}\n",
+        "name": "oraHcmGlobalhumaPromoteanemployeelink",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "pAssignmentId": {
+              "type": "string",
+              "description": "This is the assignmentId of the person"
+            },
+            "pAssignmentNumber": {
+              "type": "string",
+              "description": "This is the assignment number of the person"
+            },
+            "pBusinessTitle": {
+              "type": "string",
+              "description": "This is the business title(AssignmentName) of the person. If there are spaces in the title string it has to be passed with URL encoding. For example, if the BusinessTitle of the person is Regional Line Manager, then the name has to be encoded to Regional%20Line%20Manager"
+            },
+            "pDisplayName": {
+              "type": "string",
+              "description": "This is the display name of the employee. If there is space in the name the name has to be passed with URL encoding. For example, if the DisplayName of the person is Adam Smith, then the name has to be encoded to Adam%20Smith"
+            },
+            "pEffectiveDate": {
+              "type": "string",
+              "description": "This is the date from which this promotion will take effect."
+            },
+            "pPersonId": {
+              "type": "string",
+              "description": "This is the personId of the person"
+            },
+            "pPersonNumber": {
+              "type": "string",
+              "description": "This is the person number of the person"
+            }
+          },
+          "required": [
+            "pAssignmentId",
+            "pAssignmentNumber",
+            "pBusinessTitle",
+            "pDisplayName",
+            "pEffectiveDate",
+            "pPersonId",
+            "pPersonNumber"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "description": "This function submits the promotion for the Selected Worker's Assignment in the system only when there is no change in job in this promotion. The Operation payload of this Business Function should be in the JSON format only, and not a stringified JSON\nAll parameter names and descriptions\n\nField:\n- Name: AssigmentId\n- Description: The assignment id of the worker\n\nField:\n- Name: PersonId\n- Description: The person id of the worker\n\nField:\n- Name: DisplayName\n- Description: The display name of the worker\n\nField:\n- Name: EffectiveDate\n- Description: The date on which the processing is done on\n\nField:\n- Name: EffectiveStartDate\n- Description: The effective start date on the employment record.\n\nField:\n- Name: EffectiveEndDate\n- Description: The effective end date on the employment record.\n\nField:\n- Name: EffectiveLatestChange\n- Description: The effective latest change on the employment record.\n\nField:\n- Name: EffectiveSequence\n- Description: The effective sequence on the employment record.\n\nField:\n- Name: PeriodOfServieceId\n- Description: The period of service id of the worker.\n\nField:\n- Name: LegislationCode\n- Description: The legislation code on the employment record\n\nField:\n- Name: BusinessUnitId\n- Description: The BusinessUnitId on the employment record\t\n\nField:\n- Name: JobSetId\n- Description: The JobSetId on the employment record\n\nField:\n- Name: GradeSetId\n- Description: The GradeSetId on the employment record\n\nField:\n- Name: LocationSetId\n- Description: The LocationSetId on the employment record\n\nField:\n- Name: DepartmentSetId\n- Description: The DepartmentSetId on the employment record\n\nField:\n- Name: ActionOccurrenceId\n- Description: The action occurrence id on the employment record\n\nField:\n- Name: GradeId\n- Description: The new grade id for the worker\n\nField:\n- Name: BusinessTitle\n- Description: Proposed Business Title of the worker\n\nField:\n- Name: ActionId\n- Description: The action id on the employment record.\n\nField:\n- Name: Notes\n- Description: The Manager Assignment notes to be submitted for the transaction\n\nSample Queries:\n",
+        "name": "submit_promotion_request_on_no_job_change",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "AssigmentId": {
+              "type": "string",
+              "default": null,
+              "description": "The assignment id of the worker"
+            },
+            "PersonId": {
+              "type": "string",
+              "default": null,
+              "description": "The person id of the worker"
+            },
+            "DisplayName": {
+              "type": "string",
+              "default": null,
+              "description": "The display name of the worker"
+            },
+            "EffectiveDate": {
+              "type": "string",
+              "default": null,
+              "description": "The date on which the processing is done on"
+            },
+            "EffectiveStartDate": {
+              "type": "string",
+              "default": null,
+              "description": "The effective start date on the employment record."
+            },
+            "EffectiveEndDate": {
+              "type": "string",
+              "default": null,
+              "description": "The effective end date on the employment record."
+            },
+            "EffectiveLatestChange": {
+              "type": "string",
+              "default": null,
+              "description": "The effective latest change on the employment record."
+            },
+            "EffectiveSequence": {
+              "type": "string",
+              "default": null,
+              "description": "The effective sequence on the employment record."
+            },
+            "PeriodOfServieceId": {
+              "type": "string",
+              "default": null,
+              "description": "The period of service id of the worker."
+            },
+            "LegislationCode": {
+              "type": "string",
+              "default": null,
+              "description": "The legislation code on the employment record"
+            },
+            "BusinessUnitId": {
+              "type": "string",
+              "default": null,
+              "description": "The BusinessUnitId on the employment record"
+            },
+            "JobSetId": {
+              "type": "string",
+              "default": null,
+              "description": "The JobSetId on the employment record"
+            },
+            "GradeSetId": {
+              "type": "string",
+              "default": null,
+              "description": "The GradeSetId on the employment record"
+            },
+            "LocationSetId": {
+              "type": "string",
+              "default": null,
+              "description": "The LocationSetId on the employment record"
+            },
+            "DepartmentSetId": {
+              "type": "string",
+              "default": null,
+              "description": "The DepartmentSetId on the employment record"
+            },
+            "ActionOccurrenceId": {
+              "type": "string",
+              "default": null,
+              "description": "The action occurrence id on the employment record"
+            },
+            "GradeId": {
+              "type": "string",
+              "default": null,
+              "description": "The new grade id for the worker"
+            },
+            "BusinessTitle": {
+              "type": "string",
+              "default": null,
+              "description": "Proposed Business Title of the worker"
+            },
+            "ActionId": {
+              "type": "string",
+              "default": null,
+              "description": "The action id on the employment record."
+            },
+            "Notes": {
+              "type": "string",
+              "default": null,
+              "description": "The Manager Assignment notes to be submitted for the transaction"
+            }
+          },
+          "required": []
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "description": "This function submits the promotion for the Selected Worker's Assignment in the system only when there is no change in grade in this promotion. The Operation payload of this Business Function should be in the JSON format only, and not a stringified JSON\nAll parameter names and descriptions\n\nField:\n- Name: AssigmentId\n- Description: The assignment id of the worker\n\nField:\n- Name: PersonId\n- Description: The person id of the worker\n\nField:\n- Name: DisplayName\n- Description: The display name of the worker\n\nField:\n- Name: EffectiveDate\n- Description: The date on which the processing is done on\n\nField:\n- Name: EffectiveStartDate\n- Description: The effective start date on the employment record.\n\nField:\n- Name: EffectiveEndDate\n- Description: The effective end date on the employment record.\n\nField:\n- Name: EffectiveLatestChange\n- Description: The effective latest change on the employment record.\n\nField:\n- Name: EffectiveSequence\n- Description: The effective sequence on the employment record.\n\nField:\n- Name: PeriodOfServieceId\n- Description: The period of service id of the worker.\n\nField:\n- Name: LegislationCode\n- Description: The legislation code on the employment record\n\nField:\n- Name: BusinessUnitId\n- Description: The BusinessUnitId on the employment record\t\n\nField:\n- Name: JobSetId\n- Description: The JobSetId on the employment record\n\nField:\n- Name: GradeSetId\n- Description: The GradeSetId on the employment record\n\nField:\n- Name: LocationSetId\n- Description: The LocationSetId on the employment record\n\nField:\n- Name: DepartmentSetId\n- Description: The DepartmentSetId on the employment record\n\nField:\n- Name: JobId\n- Description: Proposed Job ID of the worker\t\n\nField:\n- Name: ActionOccurrenceId\n- Description: The action occurrence id on the employment record\n\nField:\n- Name: BusinessTitle\n- Description: Proposed Business Title of the worker\n\nField:\n- Name: ActionId\n- Description: The action id on the employment record.\n\nField:\n- Name: Notes\n- Description: The Manager Assignment notes to be submitted for the transaction\n\nSample Queries:\n",
+        "name": "submit_promotion_request_on_no_grade_change",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "AssigmentId": {
+              "type": "string",
+              "default": null,
+              "description": "The assignment id of the worker"
+            },
+            "PersonId": {
+              "type": "string",
+              "default": null,
+              "description": "The person id of the worker"
+            },
+            "DisplayName": {
+              "type": "string",
+              "default": null,
+              "description": "The display name of the worker"
+            },
+            "EffectiveDate": {
+              "type": "string",
+              "default": null,
+              "description": "The date on which the processing is done on"
+            },
+            "EffectiveStartDate": {
+              "type": "string",
+              "default": null,
+              "description": "The effective start date on the employment record."
+            },
+            "EffectiveEndDate": {
+              "type": "string",
+              "default": null,
+              "description": "The effective end date on the employment record."
+            },
+            "EffectiveLatestChange": {
+              "type": "string",
+              "default": null,
+              "description": "The effective latest change on the employment record."
+            },
+            "EffectiveSequence": {
+              "type": "string",
+              "default": null,
+              "description": "The effective sequence on the employment record."
+            },
+            "PeriodOfServieceId": {
+              "type": "string",
+              "default": null,
+              "description": "The period of service id of the worker."
+            },
+            "LegislationCode": {
+              "type": "string",
+              "default": null,
+              "description": "The legislation code on the employment record"
+            },
+            "BusinessUnitId": {
+              "type": "string",
+              "default": null,
+              "description": "The BusinessUnitId on the employment record"
+            },
+            "JobSetId": {
+              "type": "string",
+              "default": null,
+              "description": "The JobSetId on the employment record"
+            },
+            "GradeSetId": {
+              "type": "string",
+              "default": null,
+              "description": "The GradeSetId on the employment record"
+            },
+            "LocationSetId": {
+              "type": "string",
+              "default": null,
+              "description": "The LocationSetId on the employment record"
+            },
+            "DepartmentSetId": {
+              "type": "string",
+              "default": null,
+              "description": "The DepartmentSetId on the employment record"
+            },
+            "JobId": {
+              "type": "string",
+              "default": null,
+              "description": "Proposed Job ID of the worker"
+            },
+            "ActionOccurrenceId": {
+              "type": "string",
+              "default": null,
+              "description": "The action occurrence id on the employment record"
+            },
+            "BusinessTitle": {
+              "type": "string",
+              "default": null,
+              "description": "Proposed Business Title of the worker"
+            },
+            "ActionId": {
+              "type": "string",
+              "default": null,
+              "description": "The action id on the employment record."
+            },
+            "Notes": {
+              "type": "string",
+              "default": null,
+              "description": "The Manager Assignment notes to be submitted for the transaction"
+            }
+          },
+          "required": []
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "description": "This function submits the promotion for the Selected Worker's Assignment in the system only when both job and grade are being changed in this promotion. The Operation payload of this Business Function should be in the JSON format only, and not a stringified JSON\t\nAll parameter names and descriptions\n\nField:\n- Name: AssigmentId\n- Description: The assignment id of the worker\n\nField:\n- Name: PersonId\n- Description: The person id of the worker\n\nField:\n- Name: DisplayName\n- Description: The display name of the worker\n\nField:\n- Name: EffectiveDate\n- Description: The date on which the processing is done on\n\nField:\n- Name: EffectiveStartDate\n- Description: The effective start date on the employment record.\n\nField:\n- Name: EffectiveEndDate\n- Description: The effective end date on the employment record.\n\nField:\n- Name: EffectiveLatestChange\n- Description: The effective latest change on the employment record.\n\nField:\n- Name: EffectiveSequence\n- Description: The effective sequence on the employment record.\n\nField:\n- Name: PeriodOfServieceId\n- Description: The period of service id of the worker.\n\nField:\n- Name: LegislationCode\n- Description: The legislation code on the employment record\n\nField:\n- Name: BusinessUnitId\n- Description: The BusinessUnitId on the employment record\t\n\nField:\n- Name: JobSetId\n- Description: The JobSetId on the employment record\n\nField:\n- Name: GradeSetId\n- Description: The GradeSetId on the employment record\n\nField:\n- Name: LocationSetId\n- Description: The LocationSetId on the employment record\n\nField:\n- Name: DepartmentSetId\n- Description: The DepartmentSetId on the employment record\n\nField:\n- Name: JobId\n- Description: The new Job id of the worker.\n\nField:\n- Name: ActionOccurrenceId\n- Description: The action occurrence id on the employment record\n\nField:\n- Name: GradeId\n- Description: The new grade id for the worker\n\nField:\n- Name: BusinessTitle\n- Description: Proposed Business Title of the worker\n\nField:\n- Name: ActionId\n- Description: The action id on the employment record.\n\nField:\n- Name: Notes\n- Description: The Manager Assignment notes to be submitted for the transaction\n\nSample Queries:\n",
+        "name": "submit_promotion_request_on_both_job_and_grade_change",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "AssigmentId": {
+              "type": "string",
+              "default": null,
+              "description": "The assignment id of the worker"
+            },
+            "PersonId": {
+              "type": "string",
+              "default": null,
+              "description": "The person id of the worker"
+            },
+            "DisplayName": {
+              "type": "string",
+              "default": null,
+              "description": "The display name of the worker"
+            },
+            "EffectiveDate": {
+              "type": "string",
+              "default": null,
+              "description": "The date on which the processing is done on"
+            },
+            "EffectiveStartDate": {
+              "type": "string",
+              "default": null,
+              "description": "The effective start date on the employment record."
+            },
+            "EffectiveEndDate": {
+              "type": "string",
+              "default": null,
+              "description": "The effective end date on the employment record."
+            },
+            "EffectiveLatestChange": {
+              "type": "string",
+              "default": null,
+              "description": "The effective latest change on the employment record."
+            },
+            "EffectiveSequence": {
+              "type": "string",
+              "default": null,
+              "description": "The effective sequence on the employment record."
+            },
+            "PeriodOfServieceId": {
+              "type": "string",
+              "default": null,
+              "description": "The period of service id of the worker."
+            },
+            "LegislationCode": {
+              "type": "string",
+              "default": null,
+              "description": "The legislation code on the employment record"
+            },
+            "BusinessUnitId": {
+              "type": "string",
+              "default": null,
+              "description": "The BusinessUnitId on the employment record"
+            },
+            "JobSetId": {
+              "type": "string",
+              "default": null,
+              "description": "The JobSetId on the employment record"
+            },
+            "GradeSetId": {
+              "type": "string",
+              "default": null,
+              "description": "The GradeSetId on the employment record"
+            },
+            "LocationSetId": {
+              "type": "string",
+              "default": null,
+              "description": "The LocationSetId on the employment record"
+            },
+            "DepartmentSetId": {
+              "type": "string",
+              "default": null,
+              "description": "The DepartmentSetId on the employment record"
+            },
+            "JobId": {
+              "type": "string",
+              "default": null,
+              "description": "The new Job id of the worker."
+            },
+            "ActionOccurrenceId": {
+              "type": "string",
+              "default": null,
+              "description": "The action occurrence id on the employment record"
+            },
+            "GradeId": {
+              "type": "string",
+              "default": null,
+              "description": "The new grade id for the worker"
+            },
+            "BusinessTitle": {
+              "type": "string",
+              "default": null,
+              "description": "Proposed Business Title of the worker"
+            },
+            "ActionId": {
+              "type": "string",
+              "default": null,
+              "description": "The action id on the employment record."
+            },
+            "Notes": {
+              "type": "string",
+              "default": null,
+              "description": "The Manager Assignment notes to be submitted for the transaction"
+            }
+          },
+          "required": []
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "description": "This function fetches the list of Assignment Data for all reports of logged in user, using the Effective Date.\nAll parameter names and descriptions\n\nField:\n- Name: EffectiveDate\n- Description: This is the Effective Date of the worker in YYYY-MM-DD format\n\nField:\n- Name: reportsValue\n- Description: This parameter takes default value as \"DIRECTS\"\n\nField:\n- Name: securityAction\n- Description: Security Action for the employment process. Possible values are 'ChangeWorkScheduleforPerson' or 'PromotePerson'. Only one of these must be passed as parameter.\n\nSample Queries:\n",
+        "name": "search_my_direct_reports",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "EffectiveDate": {
+              "type": "string",
+              "default": null,
+              "description": "This is the Effective Date of the worker in YYYY-MM-DD format"
+            },
+            "reportsValue": {
+              "type": "string",
+              "default": null,
+              "description": "This parameter takes default value as \"DIRECTS\""
+            },
+            "securityAction": {
+              "type": "string",
+              "default": null,
+              "description": "Security Action for the employment process. Possible values are 'ChangeWorkScheduleforPerson' or 'PromotePerson'. Only one of these must be passed as parameter."
+            }
+          },
+          "required": []
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "description": "This function fetches the Assignment Data of a worker only within the team, using the Display Name and the Effective Date.\nAll parameter names and descriptions\n\nField:\n- Name: workerName\n- Description: This is the displayName of the worker\n\nField:\n- Name: EffectiveDate\n- Description: This is the Effective Date of the worker in YYYY-MM-DD format\n\nField:\n- Name: reportsValue\n- Description: This parameter takes default value as \"DIRECTS\"\n\nField:\n- Name: securityAction\n- Description: Security Action for the employment process. Possible values are 'ChangeWorkScheduleforPerson' or 'PromotePerson'. Only one of these must be passed as parameter.\n\nSample Queries:\n",
+        "name": "search_worker_data_within_team",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "workerName": {
+              "type": "string",
+              "default": null,
+              "description": "This is the displayName of the worker"
+            },
+            "EffectiveDate": {
+              "type": "string",
+              "default": null,
+              "description": "This is the Effective Date of the worker in YYYY-MM-DD format"
+            },
+            "reportsValue": {
+              "type": "string",
+              "default": null,
+              "description": "This parameter takes default value as \"DIRECTS\""
+            },
+            "securityAction": {
+              "type": "string",
+              "default": null,
+              "description": "Security Action for the employment process. Possible values are 'ChangeWorkScheduleforPerson' or 'PromotePerson'. Only one of these must be passed as parameter."
+            }
+          },
+          "required": []
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "description": "This function fetches the Assignment Data, which must be retrieved only by the Display Name and the Effective Date, by searching in the entire Organization\nAll parameter names and descriptions\n\nField:\n- Name: workerName\n- Description: This is the displayName of the worker\n\nField:\n- Name: EffectiveDate\n- Description: This is the Effective Date of the worker in YYYY-MM-DD format\n\nField:\n- Name: securityAction\n- Description: Security Action for the employment process. Possible values are 'ChangeWorkScheduleforPerson' or 'PromotePerson'. Exactly one of these must be passed as parameter. This is a required parameter, if nothing is passed use either of the possible values.\n\nSample Queries:\n",
+        "name": "search_worker_data_by_name",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "workerName": {
+              "type": "string",
+              "default": null,
+              "description": "This is the displayName of the worker"
+            },
+            "EffectiveDate": {
+              "type": "string",
+              "default": null,
+              "description": "This is the Effective Date of the worker in YYYY-MM-DD format"
+            },
+            "securityAction": {
+              "type": "string",
+              "default": null,
+              "description": "Security Action for the employment process. Possible values are 'ChangeWorkScheduleforPerson' or 'PromotePerson'. Exactly one of these must be passed as parameter. This is a required parameter, if nothing is passed use either of the possible values."
+            }
+          },
+          "required": []
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "description": "Get all self details\nAll parameter names and descriptions\n\nSample Queries:\n",
+        "name": "getall_selfDetails",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "description": "This function fetches Job ID and Job Code by accepting Job Name and Effective Date\nAll parameter names and descriptions\n\nField:\n- Name: JobName\n- Description: This is the proposed Job Name to which the Worker has to be promoted.\n\nField:\n- Name: EffectiveDate\n- Description: This is the Effective Date of the transaction in YYYY-MM-DD format\n\nSample Queries:\n",
+        "name": "search_by_job_name",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "JobName": {
+              "type": "string",
+              "default": null,
+              "description": "This is the proposed Job Name to which the Worker has to be promoted."
+            },
+            "EffectiveDate": {
+              "type": "string",
+              "default": null,
+              "description": "This is the Effective Date of the transaction in YYYY-MM-DD format"
+            }
+          },
+          "required": []
+        }
+      }
+    }
+  ],
+  "model": "oci-agent/openai.gpt-5-mini",
+  "max_tokens": 32000,
+  "model_client_cls": "CustomOciAgentClient",
+  "temperature": 0.001,
+  "p": 0.75,
+  "k": 0,
+  "reasoning_effort": "low"
+}
+Output
+{
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "content": "Thanks — I can help with this. Quick important note before we continue:\n\n- You asked to change Position, Department and Location as part of this promotion. Updating Position, Department or Location is out of scope for this agent. I can only update Job, Grade, Business Title and Manager Assignment Notes.\n- If you want those out-of-scope attributes changed as well, I can open the promotion page in the Oracle HCM UI so you can complete the full update there.\n\nPlease choose one option (and then I’ll ask the next required input):\n\n1) Proceed with the promotion here but limited to in-scope changes only (Job: QA Engineer2, Grade: Admin03, Business Title: Senior QA Engineer BR, Manager Notes provided) — I will then need the employee’s Assignment Number (or confirm if the display name uniquely identifies their assignment).  \n2) Open the Oracle HCM promotion page (deep link) so you or an authorized user can change Position / Department / Location as needed.\n\nWhich do you prefer? Also — please provide the Assignment Number for Hassan Shawn (or tell me if the display name alone should be used because it uniquely identifies the assignment).",
+        "role": "assistant"
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "created": 0
+}
+
+
