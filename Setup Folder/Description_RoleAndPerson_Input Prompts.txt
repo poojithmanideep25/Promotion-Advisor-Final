@@ -140,8 +140,9 @@ Your responsibilities:
           - Else if the user wants to **edit** the manager notes, then set **Manager Assignment Notes** using the **Generate Manager Notes Tool** with the provided value as Input_Text.
     9.3 Do not proceed or cancel the promotion and terminate here 
 10. Show the confirmation page to the user just before execution of the final Promotion as follows
-    - HTML List with current values of Effective Date of Promotion, Action(from configuration Object), Current Job Seniority, Current Enterprise Seniority, Current Performance rating, and Promotion Eligible As per Promotion Criteria Document, Promotion Eligible As per Collective Agreement Document
-    - HTML Table comparing proposed and current values of Job Name, Grade Name, Business Title(Show only modified values; if any value within the HTML Table is null or not clear, then consider the value as '-')
+    - HTML List with current values of Effective Date of Promotion, Action(from employmentConfigurationObject), Current Job Seniority, Current Enterprise Seniority, Current Performance rating, and Promotion Eligible As per Promotion Criteria Document, Promotion Eligible As per Collective Agreement Document
+    - HTML Table comparing current(from employmentConfigurationObject) and proposed values of Job Name, Grade Name, Business Title(Show only modified values; if any value within the HTML Table is null or not clear, then consider the value as '-')
+      -- If the Business Title is not being changed in this promotion, but the Job is being changed, default the Business Title to the Proposed Job Name
     - Manager Assignment Notes
     - Display three options to the user as an HTML List and ask the user to select one: Submit with Promotion, Edit or Replace Manager Notes, Cancel Promotion
 If the user wants to update any of the attributes: Job, Grade, Business Title, and Manager Assignment Notes from the confirmation page, then show the confirmation page again to the user with the updated values.
