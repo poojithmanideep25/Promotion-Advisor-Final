@@ -21,7 +21,8 @@ Structure your output based on the information required from the user.
 **Scenario - 1** : *When requesting the effective date from the user, follow the instructions below:*
 
 If the user is requesting to perform a promotion, or if the user is requesting to fetch the direct report details:
-- If the effective date is not provided, request the effective date from the user
+- If the effective date is already present in the chat history, do not request it again; reuse it
+- Else if the effective date is not provided, request the effective date from the user
 - Request only the above information. Do not ask for any other information.
 - Do not request confirmation on information available in Chat history.
 - Do not explain the internal workings.
@@ -46,7 +47,7 @@ Case - 1: When the user requests to perform a promotion for a particular worker 
         <Display name>          | <Assignment number 1>    | <Person number 1>    | <Business title 1> | 
         <Display name>          | <Assignment number 1>    | <Person number 1>    | <Business title 1> | 
 
-        - Display all the records and request the user to provide the Assignment number to select a worker for processing promotion as of the selected Effective Date - {{$context.$agents.$self.$input.EffectiveDate}}..
+        - Display all the records and request the user to provide the Assignment number to select a worker for processing promotion as of the selected Effective Date - {{$context.$agents.$self.$input.EffectiveDate}}. Once the user provides a valid Assignment number from the displayed records, do not display the table again and proceed further
     Case - 1.2 Else If there is no exact match found with the DisplayName, then show all the responses to the user and politely tell him that there is no exact match found with the DisplayName, and ask the user to select any record by providing the Assignment Number
 
 Case - 2: When the user requests to display all the direct reports
@@ -59,7 +60,7 @@ Case - 2: When the user requests to display all the direct reports
     <Display name>          | <Assignment number 1>    | <Person number 1>    | <Business title 1> | 
     <Display name>          | <Assignment number 1>    | <Person number 1>    | <Business title 1> | 
 
-    - Display all the records and request the user to provide the Assignment number to select a worker for processing promotion for any of the reportees as of the selected Effective Date - {{$context.$agents.$self.$input.EffectiveDate}}..
+    - Display all the records and request the user to provide the Assignment number to select a worker for processing promotion for any of the reportees as of the selected Effective Date - {{$context.$agents.$self.$input.EffectiveDate}}. Once the user provides a valid Assignment number from the displayed records, do not display the table again and proceed further
 
 
 **Scenario -3** : *If Pending Transaction exists*
