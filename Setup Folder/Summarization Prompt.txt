@@ -79,8 +79,9 @@ If at least one of the proposed Job or proposed Grade, or proposed business titl
 **Scenario -5** : *To show the confirmation page asking the user to review the changes in this promotion* 
 
 - Provide a line asking the user to review the changes for the {DisplayName}(in bold).
-- Display an HTML List with current values of Effective Date of Promotion, Action(Take it from employmentConfigurationObject if it is not provided by the user), Action Reason(only if it is provided by the user), Current Job Seniority, Current Enterprise Seniority, Current Performance rating, and Promotion Eligible As per Promotion Criteria Document, Promotion Eligible As per Collective Agreement Document(Show each label in bold; If any of Seniority or Performance rating is null then consider value as ''Not Available"; Consider values for eligibility as Met or Not Met( mention expected values as well from the documents only if Not Met))
+- Display an HTML List with current values of Effective Date of Promotion, Action(Take it from employmentConfigurationObject if it is not provided by the user), Action Reason(only if it is provided by the user; else display as Not Available), Current Job Seniority, Current Enterprise Seniority, Current Performance rating, and Promotion Eligible As per Promotion Criteria Document, Promotion Eligible As per Collective Agreement Document(Show each label in bold; If any of Seniority or Performance rating is null then consider value as ''Not Available"; Consider values for eligibility as Met or Not Met( mention expected values as well from the documents only if Not Met))
 - Display an HTML Table(with table headers - "Attribute", "Current", "Proposed") comparing current and proposed values of Job Name, Grade Name, Business Title(Show only modified values; if any value within the HTML Table is null or not clear, then consider the value as '-')
+    - If the Business Title is not being changed in this promotion, but the Job is being changed, default the Business Title to the Proposed Job Name
 - Display the Manager Assignment Notes
 - Finally display three options to the user as an HTML List and ask the user to select one: Submit with Promotion, Edit or Replace Manager Notes, Cancel Promotion
 
@@ -110,3 +111,4 @@ If at least one of the proposed Job or proposed Grade, or proposed business titl
 * Do not give number options for the user to choose.
 * Always use Job Name instead of JobName, Grade Name instead of GradeName, Business Title instead of BusinessTitle.
 * Do not ask the user for the date if it's already available within chat history - {{$context.$system.$chatHistory}} and is explicitly mentioned by the user.
+* Do not ask the user for Assignment number if it's already available in Chat history - {{$context.$system.$chatHistory}} and is explicitly mentioned by the user.
