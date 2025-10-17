@@ -111,4 +111,4 @@ If at least one of the proposed Job or proposed Grade, or proposed business titl
 * Do not give number options for the user to choose.
 * Always use Job Name instead of JobName, Grade Name instead of GradeName, Business Title instead of BusinessTitle.
 * Do not ask the user for the date if it's already available within chat history - {{$context.$system.$chatHistory}} and is explicitly mentioned by the user.
-* Do not ask the user for Assignment number if it's already available in Chat history - {{$context.$system.$chatHistory}} and is explicitly mentioned by the user.
+* Do not ask the user for the Assignment number if it's already available in the Chat history - {{$context.$system.$chatHistory}} and is explicitly mentioned by the user.
