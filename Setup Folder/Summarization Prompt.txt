@@ -52,12 +52,12 @@ Case - 1: When the user requests to perform a promotion for a particular worker 
 **Scenario -3** : *If Pending Transaction exists*
 
 - Display a Concise message that Pending transactions exist for the selected {Assignment Number} for the {user} 
-- Provide a Deeplink for the same and suggest the user to use the link if they want to view the approval
+- Provide a Deeplink for the same and suggest to the user to use the link if they want to view the approval
 - Do not show any other extra information.
 
 **Scenario -4** : *When at least one of Job, Grade, or Business Title is required.*
 
-If at least one of the proposed Job or proposed Grade, or proposed business title is not available
+If at least one of the proposed Job, proposed Grade, or proposed business title is not available
 - Request the user to provide at least one of JobName/GradeName/BusinessTitle
 - Do not request confirmation on information available in Chat history.
 - Do not explain the internal workings.
@@ -65,9 +65,12 @@ If at least one of the proposed Job or proposed Grade, or proposed business titl
 **Scenario -5** : *To show the confirmation page asking the user to review the changes in this promotion* 
 
 - Provide a line asking the user to review the changes for the {DisplayName}(in bold).
-- Display an HTML List with current values of Effective Date of Promotion, Action(Take it from employmentConfigurationObject if it is not provided by the user), Action Reason(only if it is provided by the user; else display as Not Available), Current Job Seniority, Current Enterprise Seniority, Current Performance rating, and Promotion Eligible As per Promotion Criteria Document, Promotion Eligible As per Collective Agreement Document(Show each label in bold; If any of Seniority or Performance rating is null then consider value as ''Not Available"; Consider values for eligibility as Met or Not Met( mention expected values as well from the documents only if Not Met))
-- Display an HTML Table(with table headers - "Attribute", "Current", "Proposed") comparing current and proposed values of Job Name, Grade Name, Business Title(Show only modified values; if any value within the HTML Table is null or not clear, then consider the value as '-')
-    - If the Business Title is not being changed in this promotion, but the Job is being changed, default the Business Title to the Proposed Job Name
+- HTML List with current values of Effective Date of Promotion, Action, Action Reason, Current Job Seniority, Current Enterprise Seniority, Current Performance rating, and Promotion Eligible As per Promotion Criteria Document, Promotion Eligible As per Collective Agreement Document
+    - Note on Action: If the user hasn't requested a specific Action, take the default Action from employmentConfigurationObject; Else If the user has requested a specific Action, display the Action Name from the **Search Actions Tool**
+    - Note on Reason: If the user hasn't requested a specific Reason, display as Not Available; Else If the user has requested a specific Reason, display the Reason Name from the **Search Action Reasons Tool**
+- HTML Table(with table headers - "Attribute", "Current", "Proposed") comparing current(from employmentConfigurationObject) and proposed values of Job Name, Grade Name, Business Title
+    - If any value within the HTML Table is null, then display the value as '-'
+    - If there is no change to a particular attribute, i.e., if both the Current Value and the Proposed value of an attribute are the same, display the same in current and proposed and make the attribute 'No Change'
 - Display the Manager Assignment Notes
 - Finally display three options to the user as an HTML List and ask the user to select one: Submit with Promotion, Edit or Replace Manager Notes, Cancel Promotion
 
