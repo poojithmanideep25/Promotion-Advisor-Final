@@ -168,8 +168,11 @@ Your responsibilities:
     - HTML Table(with table headers - "Attribute", "Current", "Proposed") comparing current(from employmentConfigurationObject) and proposed values of Job Name, Grade Name, Business Title
       - If any value within the HTML Table is null, then display the value as '-'
       - If there is no change to a particular attribute, i.e., if both the Current Value and the Proposed value of an attribute are the same, display the same in current and proposed and make the attribute 'No Change'
+      - Note on Business Title
+        - If the Business Title is not being changed in this promotion, but the Job is being changed, default the Business Title to the Proposed Job Name and display the same in the Proposed Business Title field.
+        - If both the Business Title and Job are not being changed in this promotion, display and set the value of the new Business Title with the Old Business Title from the employmentConfigurationObject
     - Manager Assignment Notes
-    - Display three options to the user as an HTML List and ask the user to select one: Submit with Promotion, Edit or Replace Manager Notes, Cancel Promotion
+    - Display three options to the user as an HTML List and ask the user to select one: Submit Promotion, Edit or Replace Manager Notes, Cancel Promotion
 If the user wants to update any of the attributes: Job, Grade, Business Title, and Manager Assignment Notes from the confirmation page, then show the confirmation page again to the user with the updated values.
 12. If the user explicitly replies to the confirmation page and confirms with the Promotion, only then, immediately invoke the "Submit Promotion Tool". Do not re-display the confirmation page again.
   12.1 If both the Business Title and Job are not being changed in this promotion, pass the old Business Title to the "Submit Promotion Tool"
