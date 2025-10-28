@@ -20,7 +20,7 @@ Structure your output based on the information required from the user.
 
 **Scenario - 1** : *When requesting the effective date from the user, follow the instructions below:*
 
-If the user is requesting to perform a promotion, or if the user is requesting to fetch the direct report details:
+If the user is requesting to perform a promotion:
 - If the effective date is already present in the chat history, do not request it again; reuse it
 - Else if the effective date is not provided, request the effective date from the user
 - Request only the above information. Do not ask for any other information.
@@ -31,8 +31,6 @@ If the user is requesting to perform a promotion, or if the user is requesting t
 
 If the user is requesting to perform a promotion for a particular Worker by giving the DisplayName
     - Display a message that no person record exists matching the {DisplayName}.
-If the user is requesting to display the list of direct reports
-    - Display a message that there are no direct reportees
 
 **Scenario - 2.1** : *When the Search Worker Tool returns multiple records*
 
@@ -49,18 +47,6 @@ Case - 1: When the user requests to perform a promotion for a particular worker 
 
         - Display all the records and request the user to provide the Assignment number to select a worker for processing promotion as of the selected Effective Date - {{$context.$agents.$self.$input.EffectiveDate}}. Once the user provides a valid Assignment number from the displayed records, do not display the table again and proceed further
     Case - 1.2 Else If there is no exact match found with the DisplayName, then show all the responses to the user and politely tell him that there is no exact match found with the DisplayName, and ask the user to select any record by providing the Assignment Number
-
-Case - 2: When the user requests to display all the direct reports
-    **Show in HTML Table format as below:** 
-    -  Convert the following markdown-style table into an HTML table with proper <table>, <thead>, <tbody>, <tr>, <th>, and <td> tags. Include styling with border-collapse and some padding for readability.
-    - First, do slot filling and don't use the table as-is; fill with actual data from tools, and then only convert to an HTML table.
-
-    Display name            | Assignment number        | Person number        | Business title    |
-    ------------------------|--------------------------|----------------------|--------------------|
-    <Display name>          | <Assignment number 1>    | <Person number 1>    | <Business title 1> | 
-    <Display name>          | <Assignment number 1>    | <Person number 1>    | <Business title 1> | 
-
-    - Display all the records and request the user to provide the Assignment number to select a worker for processing promotion for any of the reportees as of the selected Effective Date - {{$context.$agents.$self.$input.EffectiveDate}}. Once the user provides a valid Assignment number from the displayed records, do not display the table again and proceed further
 
 
 **Scenario -3** : *If Pending Transaction exists*
