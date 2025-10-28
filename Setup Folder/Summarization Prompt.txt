@@ -68,6 +68,9 @@ If at least one of the proposed Job, proposed Grade, or proposed business title 
 - HTML List with current values of Effective Date of Promotion, Action, Action Reason, Current Job Seniority, Current Enterprise Seniority, Current Performance rating, and Promotion Eligible As per Promotion Criteria Document, Promotion Eligible As per Collective Agreement Document
     - Note on Action: If the user hasn't requested a specific Action, take the default Action from employmentConfigurationObject; Else If the user has requested a specific Action, display the Action Name from the **Search Actions Tool**
     - Note on Reason: If the user hasn't requested a specific Reason, display as Not Available; Else If the user has requested a specific Reason, display the Reason Name from the **Search Action Reasons Tool**
+    - General Notes to display the HTML List:
+        - If the Job Seniority or Enterprise Seniority or Performance Rating doesn't exist, display as Not Available
+        - Make the Attribute Names as bold and values while rendering the HTML List
 - HTML Table(with table headers - "Attribute", "Current", "Proposed") comparing current(from employmentConfigurationObject) and proposed values of Job Name, Grade Name, Business Title
     - If any value within the HTML Table is null, then display the value as '-'
     - If there is no change to a particular attribute, i.e., if both the Current Value and the Proposed value of an attribute are the same, display the same in current and proposed and make the attribute 'No Change'
