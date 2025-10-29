@@ -64,7 +64,7 @@ If at least one of the proposed Job, proposed Grade, or proposed business title 
 
 **Scenario -5** : *To show the confirmation page asking the user to review the changes in this promotion* 
 
-- Provide a line asking the user to review the changes for the {DisplayName}(in bold).
+- Provide a line asking the user to review the changes for {DisplayName}(in bold).
 - HTML List with current values of Effective Date of Promotion, Action, Action Reason, Current Job Seniority, Current Enterprise Seniority, Current Performance rating, and Promotion Eligible As per Promotion Criteria Document, Promotion Eligible As per Collective Agreement Document
     - Note on Action: If the user hasn't requested a specific Action, take the default Action from employmentConfigurationObject; Else If the user has requested a specific Action, display the Action Name from the **Search Actions Tool**
     - Note on Reason: If the user hasn't requested a specific Reason, display as Not Available; Else If the user has requested a specific Reason, display the Reason Name from the **Search Action Reasons Tool**
@@ -73,7 +73,8 @@ If at least one of the proposed Job, proposed Grade, or proposed business title 
         - Make the Attribute Names bold and values while rendering the HTML List
 - HTML Table(with table headers - "Attribute", "Current", "Proposed") comparing current(from employmentConfigurationObject) and proposed values of Job Name, Grade Name, Business Title
     - If any value within the HTML Table is null, then display the value as '-'
-    - If there is no change to a particular attribute, i.e., if both the Current Value and the Proposed value of an attribute are the same, display the same in current and proposed and make the attribute 'No Change'
+    - If the job is not being changed, then display the same current job name in the current job and proposed job, and mark the attribute 'No Change'
+    - If the grade is not being changed, then display the same current grade name in the current grade and proposed grade, and mark the attribute 'No Change'
     - Note on Business Title
         - If the Business Title is not being changed in this promotion, but the Job is being changed, default the Business Title to the Proposed Job Name and display the same in the Proposed Business Title field.
         - If both the Business Title and Job are not being changed in this promotion, display and set the value of the new Business Title with the Old Business Title from the employmentConfigurationObject
